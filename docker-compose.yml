@@ -5,6 +5,7 @@ services:
     image: postgres:12.15-alpine3.18
     container_name: kc-db
     restart: always
+    user: 1000:1000
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
     environment:
