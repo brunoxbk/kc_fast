@@ -8,3 +8,4 @@ pyinvoke
 alembic
 python-dotenv
 psycopg2
+invoke

@@ -1,10 +1,8 @@
-from pydantic import BaseModel, ConfigDict
-
+from pydantic import BaseModel, ConfigDict, EmailStr, UUID4
 
 
 class PersonCreate(BaseModel):
     model_config = ConfigDict(from_attributes=True)
-    # full_name: str
     first_name: str
     last_name: str
     email: str
