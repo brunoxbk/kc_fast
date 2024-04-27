@@ -4,6 +4,14 @@ from keycloak import KeycloakOpenID
 from typing import Annotated
 from pydantic import BaseModel
 
+from models import Person, User
+from database import engine, Base, get_db
+from repositories import UserRepository, PersonRepository
+from schemas import InitialPersonCreate, InitialPersonRetrieve
+
+
+Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI()
 
