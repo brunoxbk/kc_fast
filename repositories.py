@@ -14,6 +14,7 @@ class UserRepository:
         else:
             db.add(user)
         db.commit()
+        db.refresh(user)
         return user
 
     @staticmethod
@@ -44,6 +45,7 @@ class PersonRepository:
         else:
             db.add(person)
         db.commit()
+        # db.refresh(person)
         return person
 
     @staticmethod
