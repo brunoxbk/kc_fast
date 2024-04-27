@@ -1,7 +1,7 @@
 from uuid import uuid4
 from sqlalchemy import Column, ForeignKey, String, UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, relationship, DeclarativeBase
+from sqlalchemy.orm import Mapped, relationship
 from database import Base
 
 class Person(Base):
@@ -10,7 +10,7 @@ class Person(Base):
     email = Column(String(64), nullable=False)
     first_name = Column(String(64), nullable=False)
     last_name = Column(String(64), nullable=False)
-    users = relationship("User", back_populates="person")
+    users = relationship("User", backref="person")
 
 
 
@@ -23,6 +23,6 @@ class User(Base):
     first_name: Mapped[str]
     last_name: Mapped[str]
     person_id = Column(UUID(as_uuid=True), ForeignKey("persons.id"))
-    person = relationship("Person", back_populates="user")
+    person = relationship("Person", backref="users")
 
     __table_args__ = (UniqueConstraint("person_id"),)

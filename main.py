@@ -8,7 +8,7 @@ from models import Person, User
 from database import engine, Base, get_db
 from repositories import UserRepository, PersonRepository
 from schemas import InitialPersonCreate, InitialPersonRetrieve
-from services import PersonService
+from services import InitialPersonService
 
 
 Base.metadata.create_all(bind=engine)
@@ -148,11 +148,7 @@ def get_private():
 
 @app.post("/person", status_code=status.HTTP_201_CREATED)
 async def create_person(initial_person: InitialPersonCreate):
-    data = initial_person.model_dump()
-    person = await PersonService.create(data, db=db_session, commit=False)
-    print(person)
-    data["person_id"] = str(person.id)
-
-    # user = await UserService.create(data, db=db_session, commit=False)
-    # print(user)
-    return {"message": "ok only"}
+    
+    person = await InitialPersonService.create(initial_person)
+    
+    return {"message": f"ok {person.first_name}"}

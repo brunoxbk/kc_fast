@@ -8,13 +8,13 @@ class UserRepository:
         return db.query(User).all()
 
     @staticmethod
-    def save(db: Session, curso: User) -> User:
-        if curso.id:
-            db.merge(curso)
+    def save(db: Session, user: User) -> User:
+        if user.id:
+            db.merge(user)
         else:
-            db.add(curso)
+            db.add(user)
         db.commit()
-        return curso
+        return user
 
     @staticmethod
     def find_by_id(db: Session, id: int) -> User:
@@ -38,13 +38,13 @@ class PersonRepository:
         return db.query(Person).all()
 
     @staticmethod
-    def save(db: Session, curso: Person) -> Person:
-        if curso.id:
-            db.merge(curso)
+    def save(db: Session, person: Person) -> Person:
+        if person.id:
+            db.merge(person)
         else:
-            db.add(curso)
+            db.add(person)
         db.commit()
-        return curso
+        return person
 
     @staticmethod
     def find_by_id(db: Session, id: int) -> Person:

@@ -27,10 +27,6 @@ class InitialPersonCreate(BaseModel):
     username: str
     password: str
     email: EmailStr
-    zip_code: str
-    address: str
-    complement: str
-    city_id: UUID4
 
 
 class InitialPersonRetrieve(BaseModel):
