@@ -50,35 +50,43 @@ class InitialPersonService:
 
         db = SessionLocal()
 
-        try:
+        with SessionLocal() as db:
 
             db.begin()
 
-            person = Person(
-                email=object_data["email"],
-                first_name=object_data["first_name"],
-                last_name=object_data["last_name"]
-            )
+            # nested = db.begin_nested()
 
-            person = PersonRepository.save(db=db, person=person)
+            try:
 
-            user: User = User(
-                username=object_data["username"],
-                email=object_data["email"],
-                first_name=object_data["first_name"],
-                last_name=object_data["last_name"],
-                password=object_data["password"],
-                person=person
-            )
+                
 
-            user = UserRepository.save(db=db, user=user)
+                person = Person(
+                    email=object_data["email"],
+                    first_name=object_data["first_name"],
+                    last_name=object_data["last_name"]
+                )
 
-            db.commit()
-        except Exception as e:
-            db.rollback()
-            raise e
-        finally:
-            db.close()
+                person = PersonRepository.save(db=db, person=person)
+
+                user: User = User(
+                    username=object_data["username"],
+                    email=object_data["email"],
+                    first_name=object_data["first_name"],
+                    last_name=object_data["last_name"],
+                    # password=object_data["password"],
+                    person=person
+                )
+
+                user = UserRepository.save(db=db, user=user)
+
+                db.commit()
+            except Exception as e:
+                print("deu erro \n \n \n")
+                # db.expunge_all()
+                db.rollback()
+                raise e
+            finally:
+                db.close()
 
         
         return person

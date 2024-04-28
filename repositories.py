@@ -13,8 +13,9 @@ class UserRepository:
             db.merge(user)
         else:
             db.add(user)
-        db.commit()
-        db.refresh(user)
+        # db.commit()
+        db.flush()
+        # db.refresh(user)
         return user
 
     @staticmethod
@@ -44,7 +45,9 @@ class PersonRepository:
             db.merge(person)
         else:
             db.add(person)
-        db.commit()
+
+        # db.commit()
+        db.flush()
         # db.refresh(person)
         return person
 
